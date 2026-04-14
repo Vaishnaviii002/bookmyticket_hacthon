@@ -11,6 +11,9 @@ import pg from "pg";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
 import cors from "cors";
+import app from "./index.mjs";
+import authRoutes from "./modules/auth/auth.routes.js";
+import seatsRoutes from "./modules/seats/seats.routes.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -84,3 +87,7 @@ app.put("/:id/:name", async (req, res) => {
 });
 
 app.listen(port, () => console.log("Server starting on port: " + port));
+
+app.use("/api/auth", authRoutes);
+app.use("/api/seats", seatsRoutes);
+
