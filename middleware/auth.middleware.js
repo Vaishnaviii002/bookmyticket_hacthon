@@ -4,8 +4,8 @@ const authMiddleware = (req, res, next) => {
   try {
     const header = req.headers.authorization;
 
-    if (!header) {
-      return res.status(401).send("No token");
+    if (!header || !header.startsWith("Bearer ")) {
+      return res.status(401).json({ success: false, message: "No token or invalid format" });
     }
 
     const token = header.split(" ")[1];
@@ -14,7 +14,7 @@ const authMiddleware = (req, res, next) => {
     req.user = decoded;
     next();
   } catch (err) {
-    res.status(401).send("Invalid token");
+    res.status(401).json({ success: false, message: "Invalid token" });
   }
 };
 

@@ -23,7 +23,7 @@ import { registerUser, loginUser } from "./auth.service.js";
 
 // ✅ centralized error handler
 const handleError = (err, res) => {
-  console.error("Auth Error:", err.message);
+  console.error("Auth Error FULL:", err);
 
   const status = err.statusCode || 500;
 
